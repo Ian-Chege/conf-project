@@ -5,7 +5,7 @@ function App() {
     <main className="main">
       {/* header logo */}
       <img
-        src="../public/assets/images/logo-full.svg"
+        src="../assets/images/logo-full.svg"
         alt="Conference Ticket Generator"
         className="logo"
       />
