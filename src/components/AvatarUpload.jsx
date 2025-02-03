@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
 function AvatarUpload() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -9,7 +9,7 @@ function AvatarUpload() {
       const reader = new FileReader();
 
       reader.onload = (e) => {
-        setSelectedImage(e.target.result); 
+        setSelectedImage(e.target.result);
       };
 
       reader.readAsDataURL(file);
@@ -19,22 +19,25 @@ function AvatarUpload() {
   return (
     <div className="avatar-upload">
       <h2>Upload Avatar</h2>
-      <div> 
+      <div>
         {selectedImage ? (
-          <img src={selectedImage} alt="Preview" style={{ width: '100%', height: 'auto' }} /> 
+          <img
+            src={selectedImage}
+            alt="Preview"
+            style={{ width: "100%", height: "auto" }}
+          />
         ) : (
           <>
-            <img src="/placeholder.png" alt="Upload Avatar" /> 
-            <p>Drag and drop or click to upload</p> 
+            <p>Drag and drop or click to upload</p>
           </>
         )}
       </div>
-      <input 
-        type="file" 
-        id="avatar-input" 
-        accept="image/*" 
-        onChange={handleImageChange} 
-        style={{ display: 'none' }} 
+      <input
+        type="file"
+        id="avatar-input"
+        accept="image/*"
+        onChange={handleImageChange}
+        style={{ display: "none" }}
       />
     </div>
   );
