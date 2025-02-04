@@ -1,0 +1,101 @@
+.avatar-upload {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  color: white;
+}
+
+.avatar-upload h2 {
+  text-align: left;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+.upload-area {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  margin-bottom: 12px;
+  gap: 16px;
+}
+
+.upload-area:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.upload-area.dragging {
+  border-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.upload-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+
+.upload-icon svg {
+  width: 100%;
+  height: 100%;
+  color: #ff7f50;
+  opacity: 0.2;
+}
+
+.upload-area p {
+  margin: 0;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+}
+
+.file-info {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.file-info::before {
+  content: "ⓘ";
+  margin-right: 8px;
+  font-size: 1rem;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.error-message {
+  margin-top: 10px;
+  color: #ff4d4d;
+  font-size: 0.875rem;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  color: #333;
+}
