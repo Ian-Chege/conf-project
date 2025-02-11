@@ -83,6 +83,14 @@ input {
   font-size: 1rem;
 }
 
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border: 0.5px solid #fff;
+  box-shadow: 0 0 0 1px #1a1a1a, 0 0 0 3px #fff;
+  outline: none;
+}
+
 .generate-button {
   background-color: #ff6b6b;
   color: #fff;
