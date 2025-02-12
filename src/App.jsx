@@ -47,7 +47,7 @@ function App() {
       <h1>Your Journey to Coding Conf 2025 Starts Here!</h1>
       <p>Secure your spot at next year&apos;s biggest coding conference.</p>
 
-      <AvatarUpload />
+      <AvatarUpload /><br></br>
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">
