@@ -1,98 +1,46 @@
-import { useState } from "react";
-import "./App.css";
-import AvatarUpload from "./components/AvatarUpload";
+import { useState } from 'react';
+import Header from './components/Header';
+import RegistrationForm from './components/RegistrationForm';
+import TicketSuccess from './components/TicketSuccess';
+import PageTransition from './components/PageTransition';
+import './App.css';
 
 function App() {
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [githubUsername, setGithubUsername] = useState("");
+  const [registrationData, setRegistrationData] = useState(null);
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    switch (name) {
-      case "fullName":
-        setFullName(value);
-        break;
-      case "email":
-        setEmail(value);
-        break;
-      case "githubUsername":
-        setGithubUsername(value);
-        break;
-      default:
-        break;
-    }
+  const handleRegistrationSubmit = async (data) => {
+    // Simulate API call delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setRegistrationData(data);
+    setShowSuccess(true);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    console.log("Form submitted:", {
-      fullName,
-      email,
-      githubUsername,
-    });
-
-    setFullName("");
-    setEmail("");
-    setGithubUsername("");
+  const handleReset = () => {
+    setShowSuccess(false);
+    // We'll clear the registration data after the exit animation completes
   };
 
   return (
-    <div className="container">
-      {/* Header */}
-      <header>
-        <img src="/assets/images/logo-full.svg" alt="Coding Conference" />
-      </header>
-      <h1>Your Journey to Coding Conf 2025 Starts Here!</h1>
-      <p>Secure your spot at next year&apos;s biggest coding conference.</p>
-
-      <AvatarUpload /><br></br>
-
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="fullName">Full Name:</label>
-          <input
-            type="text"
-            id="fullName"
-            placeholder="Enter your full name"
-            name="fullName"
-            value={fullName}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Email Address:</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="Enter your email"
-            name="email"
-            value={email}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="githubUsername">GitHub Username:</label>
-          <input
-            type="text"
-            id="githubUsername"
-            placeholder="Enter your GitHub username"
-            name="githubUsername"
-            value={githubUsername}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <button className="generate-button" type="submit">
-          Generate My Ticket
-        </button>
-      </form>
+    <div className="app">
+      <Header />
+      <main>
+        <PageTransition isVisible={!showSuccess}>
+          <RegistrationForm onSubmit={handleRegistrationSubmit} />
+        </PageTransition>
+        
+        {registrationData && (
+          <PageTransition 
+            isVisible={showSuccess} 
+            onExited={() => setRegistrationData(null)}
+          >
+            <TicketSuccess 
+              registrationData={registrationData}
+              onReset={handleReset}
+            />
+          </PageTransition>
+        )}
+      </main>
     </div>
   );
 }
