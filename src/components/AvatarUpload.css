@@ -1,102 +1,161 @@
-.avatar-upload {
+.avatar-uploader {
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
   margin: 0 auto;
-  padding: 20px;
-  color: white;
 }
 
-.avatar-upload h2 {
-  text-align: left;
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-  font-weight: normal;
-}
-
-.upload-area {
+.avatar-drop-zone {
   width: 100%;
-  aspect-ratio: 16/9;
-  border: 2px dashed rgba(255, 255, 255, 0.3);
-  border-radius: 12px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-drop-zone:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.avatar-drop-zone.dragging {
+  background: rgba(255, 127, 80, 0.1);
+  border-color: #ff7f50;
+  transform: scale(1.02);
+}
+
+.avatar-drop-zone.has-preview {
+  border-style: solid;
+  border-color: #ff7f50;
+  background: none;
+}
+
+.upload-prompt {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  margin-bottom: 12px;
-  gap: 16px;
-}
-
-.upload-area:hover {
-  border-color: rgba(255, 255, 255, 0.5);
-  background-color: rgba(255, 255, 255, 0.08);
-}
-
-.upload-area.dragging {
-  border-color: rgba(255, 255, 255, 0.8);
-  background-color: rgba(255, 255, 255, 0.12);
-}
-
-.upload-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-}
-
-.upload-icon svg {
-  width: 100%;
-  height: 100%;
-  color: #ff7f50;
-  opacity: 0.2;
-}
-
-.upload-area p {
-  margin: 0;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.9);
+  gap: 1rem;
+  padding: 1.5rem;
   text-align: center;
 }
 
-.file-info {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.6);
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
- 
+.upload-icon {
+  width: 32px;
+  height: 32px;
+  stroke-width: 1.5;
+  color: #ff7f50;
+  transition: transform 0.3s ease;
 }
 
-.file-info::before {
-  content: "ⓘ";
-  margin-right: 8px;
-  font-size: 1rem;
+.avatar-drop-zone:hover .upload-icon {
+  transform: translateY(-5px);
+}
+
+.upload-text {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.primary-text {
+  color: #ff7f50;
+  font-weight: 500;
+}
+
+.secondary-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9em;
+}
+
+.file-info {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8em;
+  margin: 0;
+}
+
+.preview-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .preview-image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  border-radius: 8px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
-.error-message {
-  margin-top: 10px;
-  color: #ff4d4d;
-  font-size: 0.875rem;
-}
-
-.loading {
+.remove-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 77, 77, 0.9);
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
-  font-size: 1rem;
-  color: #333;
+  transition: all 0.2s ease;
+  opacity: 0;
+  transform: translate(50%, -50%) scale(0.8);
+}
+
+.preview-container:hover .remove-image {
+  opacity: 1;
+  transform: translate(50%, -50%) scale(1);
+}
+
+.remove-image:hover {
+  background: #ff4d4d;
+  transform: translate(50%, -50%) scale(1.1) !important;
+}
+
+.upload-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #ff7f50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-message {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: rgba(255, 77, 77, 0.1);
+  color: #ff4d4d;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.file-input {
+  display: none;
 }
